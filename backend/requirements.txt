@@ -7,7 +7,7 @@ python-multipart
 pytesseract
 fastapi-cors
 pydantic
-clerk-python
+clerk_sdk 
 Pillow
 
 groq
