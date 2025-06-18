@@ -1,0 +1,37 @@
+/* src/index.css */
+
+/* Basic Reset and Global Styles */
+:root {
+  --background-color: #f8fafc; /* A very light gray (slate-50) */
+  --sidebar-background: #1e293b; /* Dark slate (slate-800) */
+  --sidebar-hover: #334155; /* Lighter slate (slate-700) */
+  --sidebar-text: #e2e8f0; /* Light gray text (slate-200) */
+  --primary-blue: #2563eb;
+  --card-background: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-primary);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Global class for main application layout */
+.app-layout {
+  display: flex;
+  min-height: screen;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}

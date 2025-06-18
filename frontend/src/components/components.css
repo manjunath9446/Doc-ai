@@ -1,0 +1,686 @@
+/* src/components/components.css */
+
+/* --- Dashboard Page --- */
+.dashboard-header {
+  margin-bottom: 2rem;
+}
+.dashboard-header h1 {
+  font-size: 1.875rem; /* 30px */
+  font-weight: 700;
+}
+.dashboard-header p {
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+}
+@media (min-width: 768px) {
+  .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .feature-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* --- Sidebar --- */
+.sidebar {
+  width: 16rem; /* 256px */
+  background-color: var(--sidebar-background);
+  color: var(--sidebar-text);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--sidebar-hover);
+}
+.sidebar-header .logo-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+.sidebar-header h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.sidebar-nav {
+  flex-grow: 1;
+  padding: 0.5rem;
+}
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--sidebar-text);
+  transition: background-color 0.2s, color 0.2s;
+}
+.sidebar-nav a:hover {
+  background-color: var(--sidebar-hover);
+  color: #ffffff;
+}
+.sidebar-separator-container {
+  padding: 0.5rem;
+}
+.sidebar-separator {
+  border-top: 1px solid var(--sidebar-hover);
+  margin: 0.5rem 0;
+}
+.sidebar-footer {
+  padding: 1rem;
+  border-top: 1px solid var(--sidebar-hover);
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.user-avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  background-color: var(--primary-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+.user-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+.user-email {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+.feature-card {
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: box-shadow 0.2s ease-in-out;
+}
+.feature-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.feature-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.feature-card-icon-wrapper {
+  background-color: #e0e7ff; /* A light blue */
+  color: #4f46e5; /* A strong blue */
+  padding: 0.75rem;
+  border-radius: 8px;
+}
+.feature-card-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.feature-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+.feature-card-description {
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+}
+.feature-card-content {
+  flex-grow: 1; /* This makes the footer stick to the bottom */
+}
+.feature-card-footer {
+  margin-top: 1rem;
+}
+.feature-card-button {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+.feature-card-button:hover {
+  background-color: #1d4ed8; /* A darker blue */
+}
+.feature-card-button .button-icon {
+  margin-left: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+}
+/* src/components/components.css */
+
+/* --- ADD THESE NEW STYLES --- */
+
+/* --- Doc Parser Page Layout --- */
+.parser-layout {
+  display: grid;
+  grid-template-columns: 1fr; /* Default to single column on small screens */
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) { /* On larger screens (lg), switch to two columns */
+  .parser-layout {
+    grid-template-columns: 40% 1fr; /* Left column takes 40%, right takes the rest */
+  }
+}
+
+.uploader-column, .output-column {
+  width: 100%;
+}
+
+/* --- Uploader Box Style --- */
+.uploader-box {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.uploader-dropzone {
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.uploader-dropzone h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.uploader-dropzone p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+.browse-button {
+  margin-top: 1rem;
+  /* Add styles if you want to customize the <label> button */
+}
+
+/* --- Tabs and Output Card Styles --- */
+.tabs-container {
+  width: 100%;
+}
+
+.tabs-list {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, 1fr);
+  background-color: #f1f5f9; /* slate-100 */
+  border-radius: 8px;
+  padding: 0.25rem;
+}
+
+.tabs-trigger {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 6px;
+  color: var(--text-secondary);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.tabs-trigger[data-state="active"] {
+  background-color: white;
+  color: var(--text-primary);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.output-card {
+  height: 75vh; /* Makes the card nice and tall */
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.output-card-content {
+  padding: 0.5rem;
+  height: 100%;
+  flex-grow: 1;
+}
+
+/* Specific styling to make the chat fill the card */
+.chat-card-content {
+  padding: 1rem;
+}
+/* src/components/components.css */
+
+/* --- ADD OR REPLACE WITH THESE STYLES --- */
+
+/* --- Doc Parser Page Layout --- */
+.parser-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: flex-start; /* Aligns columns at the top */
+}
+@media (min-width: 1024px) {
+  .parser-layout {
+    grid-template-columns: 450px 1fr; /* Fixed width for uploader, rest for output */
+  }
+}
+
+/* --- Uploader Box Refinements --- */
+.uploader-box {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border: 1px solid var(--border-color);
+}
+.uploader-actions {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.language-select-wrapper label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+/* Basic styling for select dropdown */
+.language-select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+/* --- Styled Tabs --- */
+.tabs-list {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-left: 0.5rem;
+}
+.tabs-trigger {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: border-color 0.2s, color 0.2s;
+}
+.tabs-trigger.active {
+  border-bottom-color: var(--primary-blue);
+  color: var(--text-primary);
+}
+
+/* --- Chatbot Redesign --- */
+.chatbot-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Make it fill the parent card */
+}
+.chat-log {
+  flex-grow: 1; /* This makes the log take up all available space */
+  overflow-y: auto;
+  padding: 1rem;
+}
+.message-bubble {
+  max-width: 80%;
+  padding: 0.75rem 1rem;
+  border-radius: 18px;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+.bot-message {
+  background-color: #f1f5f9; /* slate-100 */
+  color: var(--text-primary);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+.user-message {
+  background-color: var(--primary-blue);
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+.chat-form {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+.chat-input {
+  flex-grow: 1;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+}
+.chat-input:focus {
+  outline: 2px solid var(--primary-blue);
+  border-color: transparent;
+}
+.chat-send-button {
+  height: 2.75rem;
+  width: 2.75rem;
+  flex-shrink: 0;
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+.chat-send-button:hover {
+  background-color: #1d4ed8; /* Darker blue */
+}
+.chat-send-button:disabled {
+  background-color: #94a3b8; /* slate-400 */
+  cursor: not-allowed;
+}
+/* src/components/components.css */
+
+/* --- ADD THESE NEW HOMEPAGE STYLES --- */
+
+.homepage {
+  background-color: #ffffff;
+}
+
+/* --- Hero Section Styles --- */
+.hero-section {
+  padding: 4rem 1rem;
+  background-color: var(--background-color);
+}
+.hero-cards-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .hero-cards-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.hero-card {
+  border-radius: 1.5rem; /* 24px */
+  padding: 2.5rem;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.hero-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15);
+}
+.hero-card.blue {
+  background: linear-gradient(135deg, #4F46E5, #3B82F6);
+}
+.hero-card.purple {
+  background: linear-gradient(135deg, #7C3AED, #A78BFA);
+}
+.hero-card-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1.5rem;
+}
+.hero-card-title {
+  font-size: 1.875rem; /* 30px */
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.hero-card-description {
+  font-size: 1rem;
+  opacity: 0.9;
+  flex-grow: 1; /* Pushes button down */
+  max-width: 400px;
+}
+.hero-card-button {
+  margin-top: 2rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid white;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+.hero-card:hover .hero-card-button {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* --- Workflows Section Styles --- */
+.workflows-section {
+  padding: 5rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-title {
+  text-align: center;
+  font-size: 2.25rem; /* 36px */
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4rem;
+}
+.workflow-step {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+/* Alternate layout for even-numbered steps */
+.workflow-step:nth-child(even) {
+  flex-direction: row-reverse;
+}
+.workflow-text {
+  flex: 1;
+}
+.workflow-number {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #e0e7ff; /* Light blue */
+  color: var(--primary-blue);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.workflow-text h3 {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.workflow-text p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.workflow-image {
+  flex: 1;
+}
+.workflow-image img {
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .workflow-step,
+  .workflow-step:nth-child(even) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+.site-footer {
+  background-color: #0f172a; /* A very dark slate/blue */
+  color: #94a3b8; /* A light, muted gray for text */
+  padding: 4rem 1rem;
+  font-size: 0.875rem; /* 14px */
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2.5rem;
+  padding-bottom: 2rem;
+}
+
+@media (min-width: 640px) { /* On small screens and up */
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) { /* On large screens */
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr; /* First column is wider */
+  }
+}
+
+.footer-info .footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  margin-bottom: 1rem;
+}
+
+.footer-description {
+  line-height: 1.6;
+  max-width: 300px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.footer-socials a {
+  color: #94a3b8;
+  transition: color 0.2s;
+}
+
+.footer-socials a:hover {
+  color: #ffffff;
+}
+
+.footer-links h4 {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-separator {
+  border-top: 1px solid #334155; /* slate-700 */
+  margin: 2rem 0;
+}
+
+.footer-bottom-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .footer-bottom-bar {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.copyright-text {
+  color: #64748b; /* slate-500 */
+}
+
+.footer-legal-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-legal-links a {
+  text-decoration: none;
+  color: #94a3b8;
+  transition: color 0.2s;
+}
+
+.footer-legal-links a:hover {
+  color: #ffffff;
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document AI Tool</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; background-color: #f4f4f9; }
+        .main-container { display: flex; gap: 20px; width: 95%; max-width: 1400px; margin-top: 20px; }
+        .panel { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); flex: 1; display: flex; flex-direction: column; }
+        .controls { display: flex; gap: 10px; margin-bottom: 20px; align-items: center; }
+        #json-output { background-color: #272822; color: #f8f8f2; padding: 15px; border-radius: 5px; overflow-x: auto; flex-grow: 1; }
+        /* Chatbot Styles */
+        #chatbot-container { display: flex; flex-direction: column; height: 70vh; }
+        #chat-log { flex-grow: 1; border: 1px solid #ccc; border-radius: 5px; padding: 10px; overflow-y: auto; margin-bottom: 10px; }
+        .chat-message { margin-bottom: 10px; padding: 8px 12px; border-radius: 15px; max-width: 80%; }
+        .user-message { background-color: #007bff; color: white; align-self: flex-end; margin-left: auto; }
+        .bot-message { background-color: #e9e9eb; color: black; align-self: flex-start; }
+        #chat-form { display: flex; gap: 10px; }
+        #chat-input { flex-grow: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        #chat-container.disabled { opacity: 0.5; pointer-events: none; }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="panel">
+            <h2>1. Parse Document</h2>
+            <div class="controls">
+                <input type="file" id="file-input" required>
+                <select id="lang-select">
+                    <option value="eng">English</option>
+                    <option value="deu">German</option>
+                    <option value="fra">French</option>
+                    <option value="spa">Spanish</option>
+                </select>
+                <button id="parse-btn">Parse</button>
+            </div>
+            <div id="status"></div>
+            <h3>Structured JSON Output:</h3>
+            <pre id="json-output">Upload a document to see the structured data.</pre>
+        </div>
+
+        <!-- Right Panel: Chatbot -->
+        <div class="panel">
+            <h2>2. Chat with Document</h2>
+            <div id="chat-container" class="disabled">
+                <div id="chat-log"></div>
+                <form id="chat-form">
+                    <input type="text" id="chat-input" placeholder="Ask a question about the document..." autocomplete="off">
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variable to hold the raw text context for the chatbot
+        let currentDocumentContext = '';
+
+        const parseBtn = document.getElementById('parse-btn');
+        const fileInput = document.getElementById('file-input');
+        const langSelect = document.getElementById('lang-select');
+        const jsonOutput = document.getElementById('json-output');
+        const statusDiv = document.getElementById('status');
+        const chatContainer = document.getElementById('chat-container');
+        const chatLog = document.getElementById('chat-log');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+
+        // --- Event Listener for Parsing ---
+        parseBtn.addEventListener('click', async () => {
+            if (!fileInput.files.length) {
+                statusDiv.textContent = 'Please select a file.';
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            formData.append('language', langSelect.value);
+
+            statusDiv.textContent = 'Processing... This may take a moment.';
+            jsonOutput.textContent = '';
+            chatContainer.classList.add('disabled');
+            chatLog.innerHTML = '';
+            currentDocumentContext = '';
+
+            try {
+                const response = await fetch('/parse-document/', { method: 'POST', body: formData });
+                const data = await response.json();
+
+                if (!response.ok) throw new Error(data.detail);
+
+                jsonOutput.textContent = JSON.stringify(data.structured_data, null, 2);
+                currentDocumentContext = data.raw_text; // IMPORTANT: Save context
+                chatContainer.classList.remove('disabled'); // Enable chatbot
+                statusDiv.textContent = `Successfully parsed using '${data.language_used}' language pack.`;
+                appendMessage('Chatbot is ready. Ask a question!', 'bot-message');
+
+            } catch (error) {
+                statusDiv.textContent = `Error: ${error.message}`;
+            }
+        });
+
+        // --- Event Listener for Chatbot ---
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const question = chatInput.value.trim();
+            if (!question || !currentDocumentContext) return;
+
+            appendMessage(question, 'user-message');
+            chatInput.value = '';
+
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question: question, context: currentDocumentContext })
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.detail);
+                
+                appendMessage(data.answer, 'bot-message');
+
+            } catch (error) {
+                appendMessage(`Error: ${error.message}`, 'bot-message');
+            }
+        });
+
+        function appendMessage(text, className) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${className}`;
+            messageDiv.textContent = text;
+            chatLog.appendChild(messageDiv);
+            chatLog.scrollTop = chatLog.scrollHeight; // Auto-scroll
+        }
+    </script>
+</body>
+</html>

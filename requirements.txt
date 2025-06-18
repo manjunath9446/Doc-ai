@@ -1,0 +1,17 @@
+fastapi
+
+uvicorn[standard]
+
+python-multipart
+
+pytesseract
+
+Pillow
+
+groq
+
+python-dotenv
+
+pdf2image
+
+jinja2
