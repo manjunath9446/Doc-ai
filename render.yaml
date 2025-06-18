@@ -1,0 +1,31 @@
+# render.yaml
+
+services:
+  # --- Backend Service (FastAPI API) ---
+  - type: web
+    name: Doc-ai # This MUST match the name of your existing backend service on Render
+    runtime: docker # Force Render to use the Docker runtime
+    repo: https://github.com/manjunath9446/Doc-ai # Replace with your repo URL
+    region: oregon # Or your preferred region
+    plan: free
+    healthCheckPath: /
+    dockerfilePath: ./backend/Dockerfile # The path to your Dockerfile from the root
+    envVars:
+      - key: GROQ_API_KEY
+        fromSecret: true # Mark as a secret
+      - key: CLERK_SECRET_KEY
+        fromSecret: true # Mark as a secret
+
+  # --- Frontend Service (React Static Site) ---
+  - type: static
+    name: Doc-ai-1 # This MUST match the name of your existing frontend service on Render
+    repo: https://github.com/manjunath9446/Doc-ai # Replace with your repo URL
+    region: global # Or your preferred region
+    plan: free
+    buildCommand: "cd frontend && npm install && npm run build"
+    publishDir: "frontend/dist"
+    envVars:
+      - key: VITE_API_URL
+        value: "https://doc-ai-2xjl.onrender.com" # Use the URL of your backend service above
+      - key: VITE_CLERK_PUBLISHABLE_KEY
+        fromSecret: true
