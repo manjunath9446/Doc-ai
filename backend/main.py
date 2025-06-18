@@ -18,10 +18,8 @@ app = FastAPI(
     title="Advanced Document AI Tool",
     description="Upload a document, get structured JSON, and chat with it."
 )
-origins = [
-    "http://localhost:5173",
-    "http://localhost:3000", 
-]
+origins = ["*"]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
