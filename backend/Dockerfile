@@ -1,12 +1,11 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9-slim
+# Use an official, modern Python runtime as a parent image
+FROM python:3.11-slim
 
 # Set the working directory in the container
 WORKDIR /app
 
 # --- System Dependency Installation ---
 # Install Tesseract, Poppler, and language packs inside the container image
-# This ensures they are available at runtime
 RUN apt-get update && apt-get install -y --no-install-recommends \
     tesseract-ocr \
     tesseract-ocr-eng \
@@ -31,9 +30,7 @@ COPY . .
 
 # --- Expose Port & Run Command ---
 # Make port 80 available to the world outside this container
-# Gunicorn will run on this port. Render maps its internal port to this.
 EXPOSE 80
 
 # Define the command to run your app using Gunicorn
-# We use 0.0.0.0 to bind to all network interfaces inside the container.
 CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:80", "main:app"]
