@@ -5,10 +5,14 @@ uvicorn[standard]
 python-multipart
 
 pytesseract
-
+fastapi-cors
+pydantic
+clerk-python
 Pillow
 
 groq
+gunicorn  
+
 
 python-dotenv
 
