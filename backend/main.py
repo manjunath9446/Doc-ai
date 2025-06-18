@@ -11,7 +11,6 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi import FastAPI, File, UploadFile, HTTPException, Form, Request
 from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
 load_dotenv()
@@ -32,7 +31,6 @@ app.add_middleware(
 )
 
 
-templates = Jinja2Templates(directory=".")
 
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 if not GROQ_API_KEY:
@@ -201,9 +199,10 @@ async def chat_with_document(request: ChatRequest):
         print(f"Error during Groq chat completion: {e}")
         raise HTTPException(status_code=500, detail=f"AI chat completion failed: {e}")
 
-@app.get("/", response_class=HTMLResponse)
-async def get_index_page(request: Request):
+# --- NEW, CORRECTED CODE ---
+@app.get("/")
+def read_root():
     """
-    Serves the main HTML page for the user interface.
+    A simple health check endpoint to confirm the API is running.
     """
-    return templates.TemplateResponse("index.html", {"request": request})
+    return {"message": "DocAI Backend API is running successfully."}
