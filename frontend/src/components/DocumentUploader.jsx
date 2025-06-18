@@ -5,8 +5,7 @@ import './components.css';
 
 // const API_URL = 'http://localhost:8000';
 
-const API_URL = '/api'; 
-
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 const DocumentUploader = ({ setIsLoading, setError, onParseSuccess, getToken }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [language, setLanguage] = useState('eng');
