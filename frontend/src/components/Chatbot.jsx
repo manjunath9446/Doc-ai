@@ -4,6 +4,8 @@ import { Send, Loader2 } from 'lucide-react';
 import './components.css';
 
 // const API_URL = 'http://localhost:8000';
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 const Chatbot = ({ documentContext, getToken }) => {
   const [messages, setMessages] = useState([]);
