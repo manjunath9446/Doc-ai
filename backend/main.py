@@ -38,7 +38,12 @@ client = Groq(api_key=GROQ_API_KEY)
 
 class ChatRequest(BaseModel):
     question: str
-    context: str  
+    context: str 
+def get_session(req: Request):
+    try:
+        return require_active_session(req)
+    except Exception as e:
+        raise HTTPException(status_code=401, detail=str(e)) 
 
 
 if os.name == 'nt':
